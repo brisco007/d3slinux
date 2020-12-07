@@ -1,3 +1,0 @@
-/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/build/CMakeFiles/rebuild_cache.dir
-/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/build/CMakeFiles/library_generator.dir
-/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/build/CMakeFiles/edit_cache.dir
