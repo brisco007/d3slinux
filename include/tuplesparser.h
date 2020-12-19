@@ -17,7 +17,7 @@ class TuplesParser : public AbstractParser
         /**to string */
         std::string toString();
         /**parsing the json config file*/
-        void parseFile();
+        void parseFile(string filename);
         /**adds the required includes in the generated file
         here are the includes for the different types used C++ standard and
         custom from dev*/

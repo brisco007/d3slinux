@@ -16,7 +16,7 @@ InstrumentationParser::InstrumentationParser(std::string filename)
         cerr << "Error :  "<<errno<<" " << strerror(errno) << endl;
     else{
         cout << "created instrumentation parser for "<< this->baseDir<<"/"<<this->classNameDef<<endl;
-        this->classNameDeff = new ofstream("./"+this->baseDirS+"/"+this->classNameDef,ios::out|ios::app);
+        this->classNameDeff.open("./"+this->baseDirS+"/"+this->classNameDef,ios::out|ios::app);
     }
 }
 

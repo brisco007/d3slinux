@@ -2,9 +2,10 @@
 1607904513 source:/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/src/abstractparser.cpp
 	"abstractparser.h"
 
-1607906255 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/include/abstractparser.h
+1608370845 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/include/abstractparser.h
 	<string>
 	<nlohmann/json.hpp>
+	<fstream>
 
 1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/json.hpp
 	<algorithm>
@@ -340,19 +341,19 @@
 
 1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/thirdparty/hedley/hedley_undef.hpp
 
-1607906798 source:/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/main.cpp
+1608367489 source:/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/main.cpp
 	<iostream>
 	<string>
 	"tuplesparser.h"
 	"instrumentationparser.h"
 
-1607907031 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/include/tuplesparser.h
+1608368269 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/include/tuplesparser.h
 	<string>
 	"abstractparser.h"
 	<nlohmann/json.hpp>
 	<list>
 
-1607906798 source:/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/src/tuplesparser.cpp
+1608371280 source:/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/src/tuplesparser.cpp
 	"tuplesparser.h"
 	<string>
 	<nlohmann/json.hpp>
@@ -367,4 +368,12 @@
 	<string>
 	<list>
 	"abstractparser.h"
+
+1608371245 source:/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/src/instrumentationparser.cpp
+	"instrumentationparser.h"
+	<fstream>
+	<bits/stdc++.h>
+	<iostream>
+	<sys/stat.h>
+	<sys/types.h>
 
