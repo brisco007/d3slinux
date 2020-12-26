@@ -4,6 +4,8 @@
 #include "abstractparser.h"
 #include <nlohmann/json.hpp>
 #include <list>
+
+#define TUPLES_FILE_H "g_stagestypes.h"
 using namespace std;
 using namespace nlohmann;
 
@@ -22,14 +24,18 @@ class TuplesParser : public AbstractParser
         here are the includes for the different types used C++ standard and
         custom from dev*/
         string putIncludes(list<string> includesList);
-        /**generate the vector of stagesList*/
-        string generateStagesVector(map<string,string> stages);
+        void openFluxFile();
+        string generateTupleClassConstructor(json output);
+        string generateTupleClassTurnIntoCppTuple(json output);
+        //**generate the vector of stagesList*/
+        //string generateStagesVector(map<string,string> stages);
         /**generate a class*/
-        string generateBlockClass(string className);
+        //string generateBlockClass(string className);
         /**generate an internal class named Tuple */
         string generateTupleClass(json output);
         /**generate a collection of elements*/
         string generateCollection();
+        string intToString(int i);
         /**add to file*/
         void appendFile(string codeToAdd);
         /**the main function to call for generating the tuples file*/

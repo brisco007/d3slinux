@@ -1,28 +1,52 @@
+#ifndef G_STAGESTYPES_H
+#define G_STAGESTYPES_H
+
+#include <string>
+#include <iostream>
+#include <list>
+#include <tuple>
+
+
 using namespace std;
 
-class v0
+const int numberOfStages = 3;
+const string firstStage = "V0";
+const string finalStage = "V2";
+
+namespace V0
 {
+
 	class Tuple
 	{
-		int clientID;
-		string lockModeV0;
-		
-	}
+		public:
+			int clientID;
+			string lockModeV0;
+			double lockModeV3;
+			Tuple(int clientID,string lockModeV0,double lockModeV3);
+	};
 }
-class v1
+namespace V1
 {
+
 	class Tuple
 	{
-		int clientID;
-		string lockModeV1;
-		
-	}
+		public:
+			int clientID;
+			string lockModeV1;
+			Tuple(int clientID,string lockModeV1);
+	};
 }
-class v2
+namespace V2
 {
+
 	class Tuple
 	{
-		string lockModeV2;
-		
-	}
+		public:
+			string lockModeV2;
+			Tuple(string lockModeV2);
+	};
 }
+
+const list<string> stages_list = {"V0","V1","V2"};
+
+#endif
