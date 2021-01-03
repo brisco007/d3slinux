@@ -42,6 +42,8 @@ class InstrumentationParser : public AbstractParser
         void generateInstrumentationFileContent();
         /**the main function to call for generating the g_actions.cpp file*/
         void generateActionsFileContent();
+        void generateStateHeaderFileContent();
+        string outputOfFirstStage();
 };
 
 #endif // INSTRUMENTATIONPARSER_H

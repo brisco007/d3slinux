@@ -15,7 +15,8 @@
 #define INSTRUMENTATION_FILE_NAME "g_instrumentation.cpp"
 #define INSTRUMENTATION_FILE_H "g_instrumentation.h"
 #define INSTRUMENTATION_FILE_HU "G_INSTRUMENTATION_H"
-
+#define STATE_FILE_H "state.h"
+#define STATE_FILE_HU "STATE_H"
 
 extern const string ADD_TUPLE = "addTuple";
 extern const string DEL_TUPLE = "delTuple";
@@ -118,64 +119,42 @@ void InstrumentationParser::generateInstrumentationFileContent(){
     this->classNameDeff.close();*/
 }
 string InstrumentationParser::generateAddTupleSpecific(json output,json firstStage){
-    /*
-        the output should be like
-
-        void addTuple(args...){ //maybe with types if necessary
-            V0::Tuple t V0::Tuple::Tuple(args[1],args[2]) if i can count the number of fields of a json object there the output of V0
-            and this is in case i can't.
-            V0::Tuple t V0::Tuple::Tuple();
-            t.param1 = args[0]
-            t.param2 = args[1]
-
-        cout << tuple created << args[0]<<endl;
-        }
-    */
 // TODO (brice#1#12/25/20): The addTUple should add the created tuple into the state
     static bool flag = false;
     if(flag == false){
         flag = true;
-        string code = "void addTuple(args...){\n\t";
-        code.append(firstStage["name"]).append("::Tuple t = ").append(firstStage["name"]).append("::Tuple::Tuple(");
-        int i =0;
+        string code = "void ";
+        code.append(ADD_TUPLE).append("(").append(outputOfFirstStage()).append("){\n\t");
+        code.append("Tuple t = ").append("Tuple::Tuple(");
         for(const auto& item : firstStage["infos"]["output"].items()){
-            code.append("args[").append(intToString(i)).append("],");
-            i++;
+            code.append(item.key()).append(",");
         }
         code.pop_back();
-        code.append(");\n\tcout << \"tuple created with first param \" << args[0]<<endl;\n}\n\n");
+        code.append(");\n")
+            .append("\t(stateExposer.getInstance()).clock.local_event();\n")
+            .append("\t(stateExposer.getInstance()).state.list_of_tuples.push_back(t);\n")
+            .append("}\n\n");
         return code;
     }else {
         return "";
     }
 }
 string InstrumentationParser::generateDelTupleSpecific(json output,json firstStage){
-    /*
-        the output should be like
-
-        void addTuple(args...){ //maybe with types if necessary
-            V0::Tuple t V0::Tuple::Tuple(args[1],args[2]) if i can count the number of fields of a json object there the output of V0
-            and this is in case i can't.
-            V0::Tuple t V0::Tuple::Tuple();
-            t.param1 = args[0]
-            t.param2 = args[1]
-
-        cout << tuple created << args[0]<<endl;
-        }
-    */
     // TODO (brice#1#12/25/20): The addTUple should remove the created tuple into the state
     static bool flag = false;
     if(flag == false){
         flag = true;
-        string code = "void delTuple(args...){\n\t";
-        code.append(firstStage["name"]).append("::Tuple t = ").append(firstStage["name"]).append("::Tuple::Tuple(");
-        int i =0;
+        string code = "void ";
+        code.append(DEL_TUPLE).append("(").append(outputOfFirstStage()).append("){\n\t");
+        code.append("Tuple t = ").append("Tuple::Tuple(");
         for(const auto& item : firstStage["infos"]["output"].items()){
-            code.append("args[").append(intToString(i)).append("],");
-            i++;
+            code.append(item.key()).append(",");
         }
         code.pop_back();
-        code.append(");\n\tcout << \"tuple created with first param \" << args[0]<<endl;\n}\n\n");
+        code.append(");\n")
+            .append("\t(stateExposer.getInstance()).clock.local_event();\n")
+            .append("\t(stateExposer.getInstance()).state.list_of_tuples.remove(t);\n")
+            .append("}\n\n");
         return code;
     }else{
         return "";
@@ -212,6 +191,33 @@ void InstrumentationParser::generateAnyAction(json output){
          }
 
 }
+
+void InstrumentationParser::generateStateHeaderFileContent(){
+       /*generate the file */
+    string code;
+    //include namespaces
+    //GENERATING .H
+    this->classNameDef = STATE_FILE_H;
+    openFluxFile();
+    //include everything
+    string includeTupleDef = "#include \"";
+    includeTupleDef.append(TUPLES_FILE_H).append("\"");
+    list<string> includesListH = {"#include <list>","#include \"lamport_clock.h\"",includeTupleDef};
+    code = "#ifndef ";
+    code.append(STATE_FILE_HU).append("\n#define ").append(STATE_FILE_HU).append("\n\n")
+        .append(putIncludes(includesListH))
+        .append("using namespace std;\nusing namespace ")
+        .append(graph["computationGraph"]["firstStage"])
+        .append(";\n\n")
+        .append("typedef struct State{\n")
+        .append("\tlist<Tuple> list_of_tuples;\n")
+        .append("\tLamportTime timestamp;\n")
+        .append("\tlong nodeID;\n")
+        .append("} State;\n\n")
+        .append("\n\n#endif");
+    this->appendFile(code);
+    this->classNameDeff.close();
+}
 void InstrumentationParser::generateActionsFileContent(){
     /*iterate in the main list f stages to know the classes to create*/
     string code;
@@ -222,12 +228,14 @@ void InstrumentationParser::generateActionsFileContent(){
     //include everything
     string includeTupleDef = "#include \"";
     includeTupleDef.append(TUPLES_FILE_H).append("\"");
-    list<string> includesListH = {"#include <iostream>","#include <list>","#include <tuple>",includeTupleDef};
+    list<string> includesListH = {"#include <iostream>","#include <list>","#include \"stateexposer.h\"",includeTupleDef};
     code = "#ifndef ";
     code.append(ACTIONS_FILE_HU).append("\n#define ").append(ACTIONS_FILE_HU).append("\n\n");
     code.append(putIncludes(includesListH));
     //adding namepsaces
-    code.append("using namespace std;\n\n");
+    code.append("using namespace std;\nusing namespace ")
+        .append(graph["computationGraph"]["firstStage"])
+        .append(";\n\n");
     //adding the number of functions
     code.append("const int numberOfFunctions = ").append(intToString(graph["monitoring"]["numberOfFunctions"])).append(";\n\n");
     this->appendFile(code);
@@ -241,14 +249,14 @@ void InstrumentationParser::generateActionsFileContent(){
                if(a1 == false){
                 a1 = true;
                 code = "void ";
-                code.append(ADD_TUPLE).append("(args...);\n\n");
+                code.append(ADD_TUPLE).append("(").append(outputOfFirstStage()).append(");\n\n");
                 appendFile(code);
                }
          }else if(action == DEL_TUPLE){
                 if(a2 == false){
                  a2 = true;
                  code = "void ";
-                 code.append(DEL_TUPLE).append("(args...);\n\n");
+                 code.append(DEL_TUPLE).append("(").append(outputOfFirstStage()).append(");\n\n");
                  appendFile(code);
                 }
          }else {
@@ -269,27 +277,34 @@ void InstrumentationParser::generateActionsFileContent(){
     string includeHeader = "#include \"";
     includeHeader.append(TUPLES_FILE_H)
                  .append("\"");
-    list<string> includesListC = {"#include <iostream>","#include <list>","#include <tuple>", includeHeader};
+    list<string> includesListC = {"#include <iostream>","#include <list>","#include \"stateexposer.h\"", includeHeader};
     includeHeader = "#include \"";
     includeHeader.append(ACTIONS_FILE_H).append("\"");
     includesListC.push_back(includeHeader);
     //includesListC.
     code = putIncludes(includesListC);
-    string namepspacesList = "using namespace std;\n";
-    /*for(const auto& item : this->graph["computationGraph"]["stagesDescription"].items()){
-        namepspacesList.append("using namespace ")
-                       .append(item.value()["name"])
-                       .append(";\n");
-    }
-    namepspacesList.append("\n\n");*/
-    code.append(namepspacesList);
+    code.append("using namespace std;\nusing namespace ")
+        .append(graph["computationGraph"]["firstStage"])
+        .append(";\n\n");
     appendFile(code);
     for(const auto& item : this->graph["monitoring"]["functionsDescription"].items()){
         generateAnyAction(item.value());
     }
     this->classNameDeff.close();
 }
-
+string InstrumentationParser::outputOfFirstStage(){
+    string code ="";
+    for(const auto& item : this->graph["computationGraph"]["stagesDescription"].items()){
+         if(item.value()["name"] == graph["computationGraph"]["firstStage"]){
+             for(const auto& output : item.value()["infos"]["output"].items()){
+                code.append(output.value()).append(" ").append(output.key()).append(",");
+             }
+             code.pop_back();
+            break;
+         }
+    }
+    return code;
+}
 string InstrumentationParser::intToString(int i){
     stringstream temp;
     temp << i;

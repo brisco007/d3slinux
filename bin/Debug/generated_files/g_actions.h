@@ -4,17 +4,18 @@
 #include <string>
 #include <iostream>
 #include <list>
-#include <tuple>
+#include "stateexposer.h"
 #include "g_stagestypes.h"
 
 
 using namespace std;
+using namespace V0;
 
 const int numberOfFunctions = 3;
 
-void addTuple(args...);
+void addTuple(int clientID,string lockModeV0,double lockModeV3);
 
-void delTuple(args...);
+void delTuple(int clientID,string lockModeV0,double lockModeV3);
 
 
 

@@ -12,6 +12,7 @@ void parsingFile(string & filename){
      TuplesParser tupleparser(filename);
      tupleparser.generateFile();
      InstrumentationParser instruparser(filename);
+     instruparser.generateStateHeaderFileContent();
      instruparser.generateActionsFileContent();
     }catch(exception & e){
       cout << e.what();

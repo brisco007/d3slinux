@@ -23,6 +23,8 @@ namespace V0
 			string lockModeV0;
 			double lockModeV3;
 			Tuple(int clientID,string lockModeV0,double lockModeV3);
+			bool operator == (const Tuple& t) const { return (clientID == t.clientID) &&(lockModeV0 == t.lockModeV0) &&(lockModeV3 == t.lockModeV3) ; }
+			bool operator != (const Tuple& t) const { return !operator==(t); }
 	};
 }
 namespace V1
@@ -34,6 +36,8 @@ namespace V1
 			int clientID;
 			string lockModeV1;
 			Tuple(int clientID,string lockModeV1);
+			bool operator == (const Tuple& t) const { return (clientID == t.clientID) &&(lockModeV1 == t.lockModeV1) ; }
+			bool operator != (const Tuple& t) const { return !operator==(t); }
 	};
 }
 namespace V2
@@ -44,6 +48,8 @@ namespace V2
 		public:
 			string lockModeV2;
 			Tuple(string lockModeV2);
+			bool operator == (const Tuple& t) const { return (lockModeV2 == t.lockModeV2) ; }
+			bool operator != (const Tuple& t) const { return !operator==(t); }
 	};
 }
 

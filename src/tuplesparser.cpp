@@ -19,6 +19,7 @@ using namespace nlohmann;
 //extern const string TUPLES_FILE_H = "g_stagestypes.h";
 TuplesParser::TuplesParser(string filename)
 {
+
     try{
         parseFile(filename);
     }catch(exception & e){
@@ -40,6 +41,8 @@ void TuplesParser::parseFile(string filename){
      try{
      ifstream i(filename);
      i >> graph;
+// TODO (brice#1#01/02/21): Implement a function which checks the coherence of the json file like the name of the stages should not start by numbers or special characters etc and call it here and in parseFile in instrumentationParser
+
    }catch(::detail::parse_error & e){
         cout << e.what();
         throw e;
@@ -125,8 +128,9 @@ string TuplesParser::generateTupleClassConstructor(json output){
      return code;
 }
 string TuplesParser::generateTupleClass(json output){
-     string code,construct;
+     string code,construct,opbuild;
      construct = "Tuple(";
+     opbuild = "\n\t\t\tbool operator == (const Tuple& t) const { return ";
      //ctor = "\n\t\t\tTuple(Tuple tple);";
      //code = "\tpublic:\n\t\tclass ";
      code = "\n\tclass ";
@@ -137,10 +141,14 @@ string TuplesParser::generateTupleClass(json output){
         code.append(item.value()).append(" ").append(item.key()).append(";");
         code.append("\n\t\t\t");
         construct.append(item.value()).append(" ").append(item.key()).append(",");
+        opbuild.append("(").append(item.key()).append(" == t.").append(item.key()).append(") &&");
      }
+     opbuild.pop_back();
+     opbuild.pop_back();
      construct.pop_back();
+     opbuild.append("; }\n\t\t\t").append("bool operator != (const Tuple& t) const { return !operator==(t); }");
      construct.append(");");
-     code.append(construct).append("\n\t};\n");
+     code.append(construct).append(opbuild).append("\n\t};\n");
      return code;
 }
 void TuplesParser::generateFile(){
