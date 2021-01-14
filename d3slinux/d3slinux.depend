@@ -1,0 +1,390 @@
+# depslib dependency file v1.0
+1607904513 source:/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/src/abstractparser.cpp
+	"abstractparser.h"
+
+1610620005 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/include/abstractparser.h
+	<string>
+	<nlohmann/json.hpp>
+	<fstream>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/json.hpp
+	<algorithm>
+	<cstddef>
+	<functional>
+	<initializer_list>
+	<iosfwd>
+	<iterator>
+	<memory>
+	<numeric>
+	<string>
+	<utility>
+	<vector>
+	<nlohmann/adl_serializer.hpp>
+	<nlohmann/byte_container_with_subtype.hpp>
+	<nlohmann/detail/conversions/from_json.hpp>
+	<nlohmann/detail/conversions/to_json.hpp>
+	<nlohmann/detail/exceptions.hpp>
+	<nlohmann/detail/hash.hpp>
+	<nlohmann/detail/input/binary_reader.hpp>
+	<nlohmann/detail/input/input_adapters.hpp>
+	<nlohmann/detail/input/lexer.hpp>
+	<nlohmann/detail/input/parser.hpp>
+	<nlohmann/detail/iterators/internal_iterator.hpp>
+	<nlohmann/detail/iterators/iter_impl.hpp>
+	<nlohmann/detail/iterators/iteration_proxy.hpp>
+	<nlohmann/detail/iterators/json_reverse_iterator.hpp>
+	<nlohmann/detail/iterators/primitive_iterator.hpp>
+	<nlohmann/detail/json_pointer.hpp>
+	<nlohmann/detail/json_ref.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+	<nlohmann/detail/meta/cpp_future.hpp>
+	<nlohmann/detail/meta/type_traits.hpp>
+	<nlohmann/detail/output/binary_writer.hpp>
+	<nlohmann/detail/output/output_adapters.hpp>
+	<nlohmann/detail/output/serializer.hpp>
+	<nlohmann/detail/value_t.hpp>
+	<nlohmann/json_fwd.hpp>
+	<nlohmann/ordered_map.hpp>
+	<nlohmann/detail/macro_unscope.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/adl_serializer.hpp
+	<utility>
+	<nlohmann/detail/conversions/from_json.hpp>
+	<nlohmann/detail/conversions/to_json.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/conversions/from_json.hpp
+	<algorithm>
+	<array>
+	<forward_list>
+	<iterator>
+	<map>
+	<string>
+	<tuple>
+	<type_traits>
+	<unordered_map>
+	<utility>
+	<valarray>
+	<nlohmann/detail/exceptions.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+	<nlohmann/detail/meta/cpp_future.hpp>
+	<nlohmann/detail/meta/type_traits.hpp>
+	<nlohmann/detail/value_t.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/exceptions.hpp
+	<exception>
+	<stdexcept>
+	<string>
+	<nlohmann/detail/input/position_t.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/input/position_t.hpp
+	<cstddef>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/macro_scope.hpp
+	<utility>
+	<nlohmann/thirdparty/hedley/hedley.hpp>
+	<cstdlib>
+	<cassert>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/thirdparty/hedley/hedley.hpp
+	<stdint.h>
+	<stdint.h>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/meta/cpp_future.hpp
+	<cstddef>
+	<type_traits>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/meta/type_traits.hpp
+	<limits>
+	<type_traits>
+	<utility>
+	<nlohmann/detail/iterators/iterator_traits.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+	<nlohmann/detail/meta/cpp_future.hpp>
+	<nlohmann/detail/meta/detected.hpp>
+	<nlohmann/json_fwd.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/iterators/iterator_traits.hpp
+	<iterator>
+	<nlohmann/detail/meta/void_t.hpp>
+	<nlohmann/detail/meta/cpp_future.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/meta/void_t.hpp
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/meta/detected.hpp
+	<type_traits>
+	<nlohmann/detail/meta/void_t.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/json_fwd.hpp
+	<cstdint>
+	<map>
+	<memory>
+	<string>
+	<vector>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/value_t.hpp
+	<array>
+	<cstddef>
+	<cstdint>
+	<string>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/conversions/to_json.hpp
+	<algorithm>
+	<iterator>
+	<string>
+	<tuple>
+	<type_traits>
+	<utility>
+	<valarray>
+	<vector>
+	<nlohmann/detail/iterators/iteration_proxy.hpp>
+	<nlohmann/detail/meta/cpp_future.hpp>
+	<nlohmann/detail/meta/type_traits.hpp>
+	<nlohmann/detail/value_t.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/iterators/iteration_proxy.hpp
+	<cstddef>
+	<iterator>
+	<string>
+	<tuple>
+	<nlohmann/detail/meta/type_traits.hpp>
+	<nlohmann/detail/value_t.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/byte_container_with_subtype.hpp
+	<cstdint>
+	<tuple>
+	<utility>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/hash.hpp
+	<cstddef>
+	<functional>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/input/binary_reader.hpp
+	<algorithm>
+	<array>
+	<cmath>
+	<cstddef>
+	<cstdint>
+	<cstdio>
+	<cstring>
+	<iterator>
+	<limits>
+	<string>
+	<utility>
+	<nlohmann/detail/exceptions.hpp>
+	<nlohmann/detail/input/input_adapters.hpp>
+	<nlohmann/detail/input/json_sax.hpp>
+	<nlohmann/detail/input/lexer.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+	<nlohmann/detail/meta/is_sax.hpp>
+	<nlohmann/detail/value_t.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/input/input_adapters.hpp
+	<array>
+	<cstddef>
+	<cstdio>
+	<cstring>
+	<istream>
+	<iterator>
+	<memory>
+	<numeric>
+	<string>
+	<type_traits>
+	<utility>
+	<nlohmann/detail/iterators/iterator_traits.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/input/json_sax.hpp
+	<cstddef>
+	<string>
+	<utility>
+	<vector>
+	<nlohmann/detail/exceptions.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/input/lexer.hpp
+	<array>
+	<clocale>
+	<cstddef>
+	<cstdio>
+	<cstdlib>
+	<initializer_list>
+	<string>
+	<utility>
+	<vector>
+	<nlohmann/detail/input/input_adapters.hpp>
+	<nlohmann/detail/input/position_t.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/meta/is_sax.hpp
+	<cstdint>
+	<utility>
+	<string>
+	<nlohmann/detail/meta/detected.hpp>
+	<nlohmann/detail/meta/type_traits.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/input/parser.hpp
+	<cmath>
+	<cstdint>
+	<functional>
+	<string>
+	<utility>
+	<vector>
+	<nlohmann/detail/exceptions.hpp>
+	<nlohmann/detail/input/input_adapters.hpp>
+	<nlohmann/detail/input/json_sax.hpp>
+	<nlohmann/detail/input/lexer.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+	<nlohmann/detail/meta/is_sax.hpp>
+	<nlohmann/detail/value_t.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/iterators/internal_iterator.hpp
+	<nlohmann/detail/iterators/primitive_iterator.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/iterators/primitive_iterator.hpp
+	<cstddef>
+	<limits>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/iterators/iter_impl.hpp
+	<iterator>
+	<type_traits>
+	<nlohmann/detail/exceptions.hpp>
+	<nlohmann/detail/iterators/internal_iterator.hpp>
+	<nlohmann/detail/iterators/primitive_iterator.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+	<nlohmann/detail/meta/cpp_future.hpp>
+	<nlohmann/detail/meta/type_traits.hpp>
+	<nlohmann/detail/value_t.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/iterators/json_reverse_iterator.hpp
+	<cstddef>
+	<iterator>
+	<utility>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/json_pointer.hpp
+	<algorithm>
+	<cctype>
+	<limits>
+	<numeric>
+	<string>
+	<utility>
+	<vector>
+	<nlohmann/detail/exceptions.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+	<nlohmann/detail/value_t.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/json_ref.hpp
+	<initializer_list>
+	<utility>
+	<nlohmann/detail/meta/type_traits.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/output/binary_writer.hpp
+	<algorithm>
+	<array>
+	<cstdint>
+	<cstring>
+	<limits>
+	<string>
+	<cmath>
+	<nlohmann/detail/input/binary_reader.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+	<nlohmann/detail/output/output_adapters.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/output/output_adapters.hpp
+	<algorithm>
+	<cstddef>
+	<ios>
+	<iterator>
+	<memory>
+	<ostream>
+	<string>
+	<vector>
+	<nlohmann/detail/macro_scope.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/output/serializer.hpp
+	<algorithm>
+	<array>
+	<clocale>
+	<cmath>
+	<cstddef>
+	<cstdint>
+	<cstdio>
+	<limits>
+	<string>
+	<type_traits>
+	<utility>
+	<nlohmann/detail/conversions/to_chars.hpp>
+	<nlohmann/detail/exceptions.hpp>
+	<nlohmann/detail/macro_scope.hpp>
+	<nlohmann/detail/meta/cpp_future.hpp>
+	<nlohmann/detail/output/binary_writer.hpp>
+	<nlohmann/detail/output/output_adapters.hpp>
+	<nlohmann/detail/value_t.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/conversions/to_chars.hpp
+	<array>
+	<cmath>
+	<cstdint>
+	<cstring>
+	<limits>
+	<type_traits>
+	<nlohmann/detail/macro_scope.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/ordered_map.hpp
+	<functional>
+	<memory>
+	<utility>
+	<vector>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/detail/macro_unscope.hpp
+	<nlohmann/thirdparty/hedley/hedley_undef.hpp>
+
+1596714569 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/libs/json-3.9.1/include/nlohmann/thirdparty/hedley/hedley_undef.hpp
+
+1610580105 source:/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/main.cpp
+	<iostream>
+	<string>
+	<stdlib.h>
+	"tuplesparser.h"
+	"instrumentationparser.h"
+
+1610619917 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/include/tuplesparser.h
+	<string>
+	"abstractparser.h"
+	<nlohmann/json.hpp>
+	<list>
+
+1610619802 source:/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/src/tuplesparser.cpp
+	"tuplesparser.h"
+	<string>
+	<nlohmann/json.hpp>
+	<iostream>
+	<fstream>
+	<bits/stdc++.h>
+	<iostream>
+	<sys/stat.h>
+	<list>
+	<sys/types.h>
+
+1610611883 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/include/instrumentationparser.h
+	<string>
+	<list>
+	"abstractparser.h"
+	<nlohmann/json.hpp>
+
+1610620158 source:/home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/src/instrumentationparser.cpp
+	"instrumentationparser.h"
+	<fstream>
+	<bits/stdc++.h>
+	<iostream>
+	<sys/stat.h>
+	<sys/types.h>
+	<list>
+	<vector>
+	"tuplesparser.h"
+	<sstream>
+	<algorithm>
+
+1610619058 /home/brice/Documents/COURS_5GI/Cloud-computing/Projet/code/d3slinux/include/toolsandmacros.h
+	<string>
+
