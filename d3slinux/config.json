@@ -10,7 +10,8 @@
 					"clientID": "int",
 					"lockModeV0": "string",
 					"lockModeV3": "double"
-					}
+					},
+				"verifierClass":"LambdaVerifier"
 				}
 			},
 			{"name":"V1",
@@ -19,7 +20,8 @@
 				"output": {
 					"clientID": "int",
 					"lockModeV1": "string"
-					}
+					},
+				"verifierClass":"AlternationTest"
 				}
 			},
 			{"name":"V2" ,
@@ -27,7 +29,8 @@
 				"input" : "V1",
 				"output": {
 					"lockModeV2": "string"
-					}
+					},
+				"verifierClass":"Agglutination"
 				}
 			}
 		],

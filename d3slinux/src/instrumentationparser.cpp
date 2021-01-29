@@ -277,7 +277,7 @@ void InstrumentationParser::generateActionsFileContent(){
                 exceptmsg.append(item.value()["action"])
 // TODO (brice#1#12/25/20): find how to handle this exception wisely
                          .append("\" please review your json configuration file");
-                throw exceptmsg;
+                throw runtime_error(D3SL_ERROR(exceptmsg));
          }
     }
     appendFile("\n\n#endif");

@@ -7,12 +7,19 @@
 #include <iostream>
 #include <sys/stat.h>
 #include <list>
+#include <vector>
 #include <sys/types.h>
 //#include "toolsandmacros.h"
 #define TUPLES_FILE_NAME "g_stagestypes.cpp"
 #define TUPLES_FILE_H "g_stagestypes.h"
 #define TUPLES_FILE_HU "G_STAGESTYPES_H"
 #define ACCEPTED_ERRNO 17
+#define FACTORY_FILE_NAME "vertexObjectFactory.cpp"
+#define FACTORY_FILE_H "vertexObjectFactory.h"
+#define FACTORY_FILE_HU "VERTEX_OBJECT_FACTORY_H"
+#define BASE_CLASS "AbstractVertex"
+#define BASE_FILE "abstractVertex.h"
+
 using namespace std;
 using namespace nlohmann;
 
@@ -90,7 +97,16 @@ string TuplesParser::putIncludes(list<string> includesList){
     include.append("\n\n");
     return include;
 }
-
+string TuplesParser::putIncludesVector(vector<string> includesList){
+    string include;
+    include = "#include <string>\n";
+    for (auto const& i : includesList) {
+        include.append(i)
+               .append("\n");
+    }
+    include.append("\n\n");
+    return include;
+}
 string generateTupleConstructors(json output){
  string code;
  string construct;
@@ -185,6 +201,7 @@ void TuplesParser::generateFile(){
     code.append("const string finalStage = ").append("\"").append(graph["computationGraph"]["finalStage"]).append("\"").append(";\n\n");
     //adding the list of stages
     string listOfStages = "\nconst list<string> stages_list = {";
+    string listOfVerifiersForStages = "\nconst list<string> stages_verifiers_list = {";
     appendFile(code);
 
     for(const auto& item : this->graph["computationGraph"]["stagesDescription"].items()){
@@ -192,6 +209,7 @@ void TuplesParser::generateFile(){
          code = "namespace ";
          code.append(item.value()["name"]);
          listOfStages.append("\"").append(item.value()["name"]).append("\",");
+         listOfVerifiersForStages.append("\"").append(item.value()["infos"]["verifierClass"]).append("\",");
          code.append("\n{\n");
          code.append(generateTupleClass(item.value()["infos"]));
          //code.append("};\n");
@@ -199,8 +217,11 @@ void TuplesParser::generateFile(){
          appendFile(code);
     }
     listOfStages.pop_back();
-    listOfStages.append("};");
+    listOfVerifiersForStages.pop_back();
+    listOfStages.append("};\n");
+    listOfVerifiersForStages.append("};");
     appendFile(listOfStages);
+    appendFile(listOfVerifiersForStages);
     appendFile("\n\n#endif");
     this->classNameDeff.close();
 
@@ -232,6 +253,114 @@ void TuplesParser::generateFile(){
       appendFile(code);
     }
     this->classNameDeff.close();
+
+    //GENERATING HEADER FILE FOR FACTORY
+      //GENERATING .H
+    this->classNameDef = FACTORY_FILE_H;
+    openFluxFile();
+    code = "#ifndef ";
+    code.append(FACTORY_FILE_HU).append("\n#define ").append(FACTORY_FILE_HU).append("\n\n");
+    string baseClass = "#include \"";
+    baseClass.append(BASE_FILE)
+                 .append("\"");
+    vector<string> includesListCPPFactory ={"#include <memory>","#include <map>","#include <variant>",baseClass};
+    /*includeHeader = "#include \"";
+    includeHeader.append(TUPLES_FILE_H)
+                 .append("\"");
+    includesListCPPFactory.push_back(includeHeader);*/
+    string includeSingle;
+    string singleInstanciation;
+    string prevStage = graph["computationGraph"]["firstStage"];
+    string actualStage;
+    string condInstantiation = "";
+    string mapStringEntete = "const std::map<string, std::variant<";
+    string mapString = "";
+    for(const auto& item : this->graph["computationGraph"]["stagesDescription"].items()){
+        if(prevStage == item.value()["name"])
+            continue;
+        actualStage = item.value()["name"];
+        includeSingle = "#include \"";
+        singleInstanciation = "\t\tstatic shared_ptr<";
+        singleInstanciation.append(item.value()["infos"]["verifierClass"]).append("> createInstance")
+                           .append(item.value()["infos"]["verifierClass"]).append("(){\n\t\t\t")
+                           .append(item.value()["infos"]["verifierClass"]).append(" * instance = new ")
+                           .append(item.value()["infos"]["verifierClass"]).append("();\n\t\t\t")
+                           .append("if(instance != nullptr)")
+                           .append("\n\t\t\t\treturn shared_ptr<").append(item.value()["infos"]["verifierClass"])
+                           .append("> (instance);\n\t\t\telse\n\t\t\t\treturn nullptr;\n\t\t}\n");
+        condInstantiation.append(singleInstanciation);
+        includeSingle.append(item.value()["infos"]["verifierClass"]).append(".h\"");
+        includesListCPPFactory.push_back(includeSingle);
+        mapStringEntete.append("shared_ptr<")
+                       .append(item.value()["infos"]["verifierClass"]).append(">,");
+        mapString.append("{\"").append(item.value()["infos"]["verifierClass"]).append("\",")
+                 .append("VertexObjectFactory::createInstance")
+                 .append(item.value()["infos"]["verifierClass"]).append("()},");
+        prevStage = actualStage;
+    }
+    mapString.pop_back();
+    mapString.append("\n");
+    mapStringEntete.pop_back();
+    mapStringEntete.append(">> registry {")
+    .append(mapString)
+    .append("};");
+    //includesListC.
+    //code.append(putIncludes(includesListC));
+    namepspacesList = "using namespace std;\n\n";
+    //namepspacesList.append("\n\n");
+    code.append(putIncludesVector(includesListCPPFactory))
+        .append(namepspacesList)
+        .append("class VertexObjectFactory {\n\tpublic:\n")
+        .append(condInstantiation)
+        .append("};\n\n")
+        .append(mapStringEntete)
+        .append("\n\n#endif");
+    appendFile(code);
+    this->classNameDeff.close();
+    //GENERATING CPP FILE FOR FACTORY
+      //GENERATING .CPP
+   /* this->classNameDef = FACTORY_FILE_NAME;
+    openFluxFile();
+    code ="";
+    includeHeader = "#include \"";
+    includeHeader.append(FACTORY_FILE_H)
+                 .append("\"");
+    vector<string> includesListCPPFactory ={"#include <memory>", includeHeader};
+    includeHeader = "#include \"";
+    includeHeader.append(TUPLES_FILE_H)
+                 .append("\"");
+    includesListCPPFactory.push_back(includeHeader);
+    //includesListC.
+    string includeSingle;
+    string singleInstanciation;
+    string prevStage = graph["computationGraph"]["firstStage"];
+    string actualStage;
+    string condInstantiation = "";
+    for(const auto& item : this->graph["computationGraph"]["stagesDescription"].items()){
+        if(prevStage == item.value()["name"])
+            continue;
+        actualStage = item.value()["name"];
+        includeSingle = "#include \"";
+        singleInstanciation = "\tif(name == \"";
+        singleInstanciation.append(item.value()["infos"]["verifierClass"]).append("\")\n\t\t instance = new ")
+        .append(item.value()["infos"]["verifierClass"]).append("<").append(prevStage).append("::Tuple,").append(actualStage).append("::Tuple").append(">();\n\n\t");
+        condInstantiation.append(singleInstanciation);
+        includeSingle.append(item.value()["infos"]["verifierClass"]).append(".h\"");
+        includesListCPPFactory.push_back(includeSingle);
+        prevStage = actualStage;
+    }
+     namepspacesList = "using namespace std;\n";
+    //namepspacesList.append("\n\n");
+    code = putIncludesVector(includesListCPPFactory);
+    code.append(namepspacesList);
+    appendFile(code);
+    code = "shared_ptr<";
+        code.append(BASE_CLASS).append("> VertexObjectFactory::createInstance(string name){\n\t")
+        .append(BASE_CLASS).append(" * instance = nullptr;\n\t")
+        .append(condInstantiation)
+        .append("if(instance != nullptr) \n\t\treturn shared_ptr<").append(BASE_CLASS).append("> (instance);\n\telse\n\t\t return nullptr;\n};");
+    appendFile(code);
+    this->classNameDeff.close();*/
 }
 string TuplesParser::intToString(int i){
     stringstream temp;
