@@ -25,20 +25,23 @@ void parsingFile(string & filename){
       parsingFile(filename);
     }
 }
+void generateCheckingLogic(){
+    const auto copyOptions = fs::copy_options::update_existing;
+    fs::create_directory("temporary");
+    fs::copy("generated_files/g_stagestypes.cpp", "temporary/g_stagestypes.cpp",copyOptions);
+    fs::copy("generated_files/g_stagestypes.h", "temporary/g_stagestypes.h",copyOptions);
+    fs::copy("generated_files/vertexObjectFactory.h", "temporary/vertexObjectFactory.h",copyOptions);
+    system("cp vertexes/* temporary/");
+    system("cp user_vertexes/* temporary/");
+    system("cd temporary && g++ -c *.cpp -std=c++17 && ar rvs ./../outputs/chcklogic.a *.o");
+    system("rm -rf ./temporary && rm -rf ./generated_files");
+}
 int main()
 {
     string filename;
     cout << "    Welcome to d3slinux!\nYou are about to test your distributed system. it will be done through some few steps:" << endl;
     parsingFile(filename);
-    const auto copyOptions = fs::copy_options::update_existing;
-    fs::copy("generated_files/g_stagestypes.cpp", "generated_files/vertexes/g_stagestypes.cpp",copyOptions);
-    fs::copy("generated_files/g_stagestypes.h", "generated_files/vertexes/g_stagestypes.h",copyOptions);
-    fs::copy("generated_files/vertexObjectFactory.h", "generated_files/vertexes/vertexObjectFactory.h",copyOptions);
-    system("cd generated_files/vertexes && g++ -c *.cpp -std=c++17 && ar rvs ./../outputs/chcklogic.a *.o");
-    //string generationFilePath = "./generated_files/main.cpp";
-    //const char* command = "g++ -Wall -o test ./generated_files/main.cpp";
-    //system(command);
-    //system("./test");
+    generateCheckingLogic();
     return 0;
 }
 
