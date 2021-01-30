@@ -63,9 +63,9 @@ class Server
 			{
 				// Read from the connection
   				//sampleStruct a;
-                auto bytesRead = read(connection, buffer, 100);
+                auto bytesRead = read(connection, buffer, 1024);
 
-  				std::cout << "The message was: " << buffer << std::endl;
+  				std::cout << "A stateExposer sent: " << buffer << std::endl;
 			}
 			catch(std::exception& e)
 			{
@@ -83,7 +83,7 @@ class Server
   		sockaddr_in sockaddr;
 
 		int connection;
-		char buffer[1000];
+		char buffer[1024];
 
 
 
@@ -93,7 +93,6 @@ class Server
 int main(int argc, char *argv[])
 {
   Server server1;
-  server1.receiveMessages();
   server1.receiveMessages();
   return 0;
 }

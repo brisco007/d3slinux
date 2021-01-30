@@ -2,10 +2,7 @@
 #include <iostream>
 #include <string.h>
 
-#include<sstream>
 #include<string>
-#include<boost/archive/binary_iarchive.hpp>
-#include<boost/archive/binary_oarchive.hpp>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -15,8 +12,9 @@
 #include <unistd.h>
 #include <netdb.h>
 
-
+#include <list>
 #include "state.h"
+#include "g_stagestypes.h"
 //#include "Networking.h"
 
 using namespace std;
@@ -45,8 +43,19 @@ class Client{
 		inet_pton(AF_INET, ip, &server_addr.sin_addr);
 
 		clientConnect();
-
-
+		
+		
+		state.nodeID = 1611;
+		state.timestamp = 11234;
+		V0::Tuple tuple1(1,"lskjdf",(double)343);
+		Tuple tuple2(1,"lskjdf",(double)793);
+		Tuple tuple3(1,"lskjdf",(double)643);
+		
+		state.list_of_tuples.push_back(tuple1);
+		state.list_of_tuples.push_back(tuple2);
+		state.list_of_tuples.push_back(tuple3);
+		
+		stateString = toStringState();
 
 	}
 
@@ -70,19 +79,53 @@ class Client{
 
     	//static void sendMessage(long id, char* state){
 
-    	void sendMessage(long id,std::string state){
+    	void sendMessage(){
 		try{
-                oss.str(state);
+		
+		cout<< "sending this state: " << stateString.c_str() << endl;
 		    // request/message from client
-                state = oss.str();
                // send(client, oss.str(), bufsize, 0);
-                send(client, state.c_str(), sizeof(state), 0);
+                send(client, stateString.c_str(), sizeof(stateString.c_str()), 0);
 		        	//send(client, (void*)id, sizeof(id), 0);
 
 		}catch(std::exception& e){
 		    std::cerr << e.what() << endl;
 		}
 
+    	}
+    	
+    	
+    	void sendMessage(string stateString){
+		try{
+		
+		cout<< "sending this state: " << stateString.c_str() << endl;
+		    // request/message from client
+               // send(client, oss.str(), bufsize, 0);
+		
+                send(client, stateString.c_str(), sizeof(stateString.c_str()), 0);
+		        	//send(client, (void*)id, sizeof(id), 0);
+
+		}catch(std::exception& e){
+		    std::cerr << e.what() << endl;
+		}
+
+    	}
+    	
+    	
+    	
+    	string toStringState(){
+    		string str ="";
+    		 
+    		std::list<Tuple> mylist = state.list_of_tuples;
+  		std::list<Tuple>::iterator it;
+    		str = str +"nodeId="+std::to_string(state.nodeID)+";tupleList=[";
+    		for (it=mylist.begin(); it!=mylist.end(); ++it){
+    			str = str + it->toString() +"," ;
+    		}
+    		str = str + "]";
+    		
+    		return str;
+    	
     	}
 
     /*
@@ -152,21 +195,18 @@ class Client{
     	char buffer[1024];
     	char* ip = (char*)"127.0.0.1";
  	struct sockaddr_in server_addr;
- 	long id = 11;
- 	//std::string state = "the state value is test1";
- 	std::istringstream oss;
+ 	State state;
+ 	string stateString;
 
 
 };
 
 
 int main() {
-	long id = 11;
- 	std::string state = "the state value is test1 slkdjfmlqsdf qsd flkqjsdmflf dqlksdfjqmsdlkfjqd qsdlkfjqsdlfkfjq dfqlksdfjfqmlsdkfjq dqsldffjkqdsjflqdsf qsdfdlkfjqdsmklffjqsdf qdslfkjqdslfkfqjsd fqmsdfq sdlkffjqdsfqlsjdfflqdk jqds fkqldsjfmqlkdfjfq sdfkqsdjfqlskdfjqsmdlfkjsdfsqkldsjff qlkdjfqmlkdsjf dfjqsldfjslkdjflqksdjfl sldkjflqksjdmldsfj sldkjflqskdfj sldkfjozeifj sldfjeozjf sdljozeifj qsdljzljeijf sdlkjozeifj sojief oisejfelj llkj";
+	
 	Client client1;
         client1.clientConnect();
-    	client1.sendMessage(id,state);
-    	client1.sendMessage(id,state);
+    	client1.sendMessage();
 
     return 0;
 }
