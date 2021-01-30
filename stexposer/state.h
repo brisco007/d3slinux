@@ -10,6 +10,8 @@
 using namespace std;
 using namespace V0;
 
+typedef unsigned int LamportTime;
+
 typedef struct State{
 	list<Tuple> list_of_tuples;
 	LamportTime timestamp;
