@@ -1,0 +1,85 @@
+nodeId=1;tupleList=[Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 343.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 793.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 643.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 343.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 793.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 643.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 343.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 793.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 643.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 343.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 793.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 643.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 343.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 793.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 643.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 343.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 793.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 643.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 343.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 793.000000
+,Tuple Value:
+-clientID : 1
+-lockModeV0 : lskjdf
+-lockModeV3 : 643.000000
+,]

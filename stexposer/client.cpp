@@ -1,7 +1,7 @@
 //#include "client.h"
 #include <iostream>
 #include <string.h>
-
+#include <fstream>
 #include<string>
 
 #include <sys/types.h>
@@ -44,17 +44,35 @@ class Client{
 
 		clientConnect();
 		
-		
-		state.nodeID = 1611;
+		// creating a test State
+		state.nodeID = 1;
 		state.timestamp = 11234;
-		V0::Tuple tuple1(1,"lskjdf",(double)343);
+		Tuple tuple1(1,"lskjdf",(double)343);
 		Tuple tuple2(1,"lskjdf",(double)793);
 		Tuple tuple3(1,"lskjdf",(double)643);
 		
 		state.list_of_tuples.push_back(tuple1);
 		state.list_of_tuples.push_back(tuple2);
 		state.list_of_tuples.push_back(tuple3);
-		
+		state.list_of_tuples.push_back(tuple1);
+		state.list_of_tuples.push_back(tuple2);
+		state.list_of_tuples.push_back(tuple3);
+		state.list_of_tuples.push_back(tuple1);
+		state.list_of_tuples.push_back(tuple2);
+		state.list_of_tuples.push_back(tuple3);
+		state.list_of_tuples.push_back(tuple1);
+		state.list_of_tuples.push_back(tuple2);
+		state.list_of_tuples.push_back(tuple3);
+		state.list_of_tuples.push_back(tuple1);
+		state.list_of_tuples.push_back(tuple2);
+		state.list_of_tuples.push_back(tuple3);
+		state.list_of_tuples.push_back(tuple1);
+		state.list_of_tuples.push_back(tuple2);
+		state.list_of_tuples.push_back(tuple3);
+		state.list_of_tuples.push_back(tuple1);
+		state.list_of_tuples.push_back(tuple2);
+		state.list_of_tuples.push_back(tuple3);
+		//buiding the string which will be sent to the server
 		stateString = toStringState();
 
 	}
@@ -83,9 +101,12 @@ class Client{
 		try{
 		
 		cout<< "sending this state: " << stateString.c_str() << endl;
-		    // request/message from client
-               // send(client, oss.str(), bufsize, 0);
-                send(client, stateString.c_str(), sizeof(stateString.c_str()), 0);
+		    	// request/message from client
+               		// send(client, oss.str(), bufsize, 0);
+               		
+               	writeFile(stateString);
+               	sendFile();
+                //send(client, stateString.c_str(), sizeof(stateString.c_str()), 0);
 		        	//send(client, (void*)id, sizeof(id), 0);
 
 		}catch(std::exception& e){
@@ -94,16 +115,61 @@ class Client{
 
     	}
     	
+    	void sendFile(){
+    		FILE *f;
+		int words = 0;
+		char c;
+		f=fopen(fileName.c_str(),"r");
+		while((c=getc(f))!=EOF)			//Counting No of words in the file
+		{	
+			fscanf(f , "%s" , buffer);
+			if(isspace(c)||c=='\t')
+			words++;	
+		}
+			//printf("Words = %d \n"  , words);	//Ignore
+		             
+		write(client, &words, sizeof(int));
+		rewind(f);
+		      
+        /*      fseek(f, 0L, SEEK_END);    	// tells size of the file. Not rquired for the functionality in code.
+		int sz = ftell(f);				//Just written for curiosity.
+		printf("Size is %d \n" , sz);
+		rewind(f);  
+	*/
+		       
+		char ch ;
+		while(ch != EOF)
+		{
+				
+			fscanf(f , "%s" , buffer);
+			//printf("%s\n" , buffer);	//Ignore
+			write(client,buffer,512);
+			ch = fgetc(f);
+		}
+		printf("The file was sent successfully");
+    		
+    	}
+    	
+    	void writeFile(string s){
+    		ofstream myfile(fileName);
+  		myfile << s;
+  		myfile.close();
+    		
+    	}
+    	
     	
     	void sendMessage(string stateString){
 		try{
 		
 		cout<< "sending this state: " << stateString.c_str() << endl;
-		    // request/message from client
-               // send(client, oss.str(), bufsize, 0);
+		    	// request/message from client
+               		// send(client, oss.str(), bufsize, 0);
+      		writeFile(stateString);
+               	sendFile();
 		
-                send(client, stateString.c_str(), sizeof(stateString.c_str()), 0);
-		        	//send(client, (void*)id, sizeof(id), 0);
+                //send(client, stateString.c_str(), sizeof(stateString.c_str()), 0);
+		        	
+		        //send(client, (void*)id, sizeof(id), 0);
 
 		}catch(std::exception& e){
 		    std::cerr << e.what() << endl;
@@ -191,8 +257,9 @@ class Client{
 	int client;
     	int portNum = 9999; // NOTE that the port number is same for both client and server
     	bool isExit = false;
-    	int bufsize = 1024;
-    	char buffer[1024];
+    	int bufsize = 512;
+        char buffer[512];
+        string fileName ="archive.txt";
     	char* ip = (char*)"127.0.0.1";
  	struct sockaddr_in server_addr;
  	State state;
